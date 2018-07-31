@@ -13,13 +13,13 @@ import { submit } from '../actions/AppActions';
 export default class LoginForm extends Component {
   render () {
     return (
-      <View style={styles.loginForm} id="loginForm">
+      <View style={styles.loginForm}>
         <TextInput
           style={styles.loginFormInput} 
           onChangeText={(value) => this.setState({id: value})}
           value={this.state.id}
         />
-        <TouchableHighlight id="submitBtn" style={styles.submit} underlayColor="#ffa200e6" onPress={this.submitLogin}>
+        <TouchableHighlight style={styles.submit} underlayColor="#ffa200e6" onPress={this.submitLogin}>
           <Text style={styles.submitText}>Submit</Text>
         </TouchableHighlight>
       </View>

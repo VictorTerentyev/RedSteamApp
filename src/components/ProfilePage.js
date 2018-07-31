@@ -16,7 +16,7 @@ class ProfilePage extends Component {
   render () {
     const { profileInfo: { profileInfo }, profilePageDisp: { profilePageDisp }, dispatch } = this.props;
     return (
-      <View style={setStyles(this.props.profilePageDisp)} id="ProfilePage">
+      <View style={setStyles(this.props.profilePageDisp)}>
         <Text style={styles.profilePage}>Profile Page:</Text>
         <View style={styles.profileInfoRow}>
           <Image

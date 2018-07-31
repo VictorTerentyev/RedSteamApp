@@ -13,7 +13,7 @@ class ErrorMessage extends Component {
   render () {
     const { errorMessage: { errorMessage }, errorMessageDisp: { errorMessageDisp }, dispatch } = this.props;
     return (
-      <View style={[setStyles(this.props.errorMessageDisp)]} id="ErrorMessage">
+      <View style={[setStyles(this.props.errorMessageDisp)]}>
         <Text style={styles.errorName}>Error:</Text>
         <Text style={styles.errorText}>{this.props.errorMessage.text}</Text>
       </View>
