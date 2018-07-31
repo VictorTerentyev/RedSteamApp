@@ -14,7 +14,8 @@ export default class LoginForm extends Component {
   render () {
     return (
       <View style={styles.loginForm} id="loginForm">
-        <TextInput 
+        <TextInput
+          style={styles.loginFormInput} 
           onChangeText={(value) => this.setState({id: value})}
           value={this.state.id}
         />
@@ -34,7 +35,7 @@ export default class LoginForm extends Component {
   }
 
   submitLogin = (e) => {
-    fetch('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + this.props.key + '&steamids=' + ID)
+    fetch('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + this.props.key + '&steamids=' + this.state.id)
     .then((response) => response.json())
     .then((result) => this.setState({ content: result.response.players[0] }))
     .then(submitLoginBind.bind(this));
@@ -68,16 +69,27 @@ const ID = '76561198106567256';
 
 const styles = StyleSheet.create({
   loginForm: {
-    alignSelf: 'center',
-    alignContent: 'center'
+    width: 320,
+    alignItems: 'center',
+    alignContent: 'center',
+    marginBottom: 20
+  },
+  loginFormInput: {
+    fontFamily: 'Pixel LCD-7',
+    fontSize: 14,
+    color: '#ffee0a',
+    textAlign: 'center', 
+    width: 200
   },
   submit: {
     backgroundColor: '#ffee0a',
     width: 200,
-    borderRadius: 20
+    borderRadius: 2,
+    padding: 5
   },
   submitText: {
-    fontSize: 20,
+    fontFamily: 'Pixel LCD-7',
+    fontSize: 18,
     color:'#d80000',
     textAlign: 'center'
   }

@@ -12,7 +12,8 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from 'react-native';
 
 import * as AppActions from '../actions/AppActions';
@@ -28,7 +29,15 @@ class SteamApp extends Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollContainer} id="main">
+        <ScrollView 
+          contentContainerStyle={{
+            flexGrow : 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            alignItems: 'center', 
+            width: this.state.screenWidth
+          }} 
+        >
           <Text style={styles.welcome}>
             Welcome to Red Steam App!
           </Text>
@@ -40,7 +49,20 @@ class SteamApp extends Component {
       </View>
     );
   }
+
+  constructor() {
+    super();
+    this.state = {
+      screenWidth: Dimensions.get('window').width,
+    }
+
+    Dimensions.addEventListener('change', () => {
+      this.setState({screenWidth: Dimensions.get('window').width});
+    })
+  }
 }
+
+const screenWidth = 
 
 SteamApp.propTypes = {
   profileInfo: PropTypes.object,
@@ -50,22 +72,23 @@ SteamApp.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: 20,
-    color: '#ffee0a',
     backgroundColor: '#d80000'
   },
   welcome: {
-    fontSize: 20,
+    fontFamily: 'Pixel LCD-7',
+    fontSize: 18,
     color: '#ffee0a',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: 20,
+    width: 320
   },
   instructions: {
-    fontSize: 16,
+    fontFamily: 'Pixel LCD-7',
+    fontSize: 14,
     color: '#ffee0a',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: 10,
+    width: 320
   }
 });
 

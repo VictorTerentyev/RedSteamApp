@@ -7,6 +7,7 @@ import {
   View,
   TextInput,
   Image,
+  TouchableHighlight,
   Linking
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -26,7 +27,9 @@ class ProfilePage extends Component {
             <Text style={styles.profileInfoText}>Name: {this.props.profileInfo.personaname}</Text>
             <Text style={styles.profileInfoText}>Last log off: {this.dateFormat(this.props.profileInfo.lastlogoff)}</Text>
             <Text style={styles.profileInfoText}>Time created: {this.dateFormat(this.props.profileInfo.timecreated)}</Text>
-            <Text style={styles.profileInfoText} onPress={() => Linking.openURL(this.props.profileInfo.profileurl)}>Profile URL: {this.props.profileInfo.profileurl}</Text>
+            <TouchableHighlight style={styles.profileInfoUrl} underlayColor="#ffa200e6" onPress={() => Linking.openURL(this.props.profileInfo.profileurl)}>
+              <Text style={styles.profileInfoUrlText}>Page on Steam</Text>
+            </TouchableHighlight>
           </View>
         </View>
       </View>
@@ -56,7 +59,9 @@ function setStyles(display) {
   const styles = StyleSheet.create({
     profilePage: {
       display: display,
-      marginTop: 20,
+      width: 320,
+      marginBottom: 20,
+      alignSelf: 'center'
     }
   });
   return styles.profilePage;
@@ -64,11 +69,12 @@ function setStyles(display) {
 
 const styles = StyleSheet.create({
   profilePage: {
+    fontFamily: 'Pixel LCD-7',
     color: '#ffee0a',
-    fontSize: 20
+    fontSize: 20,
+    marginBottom: 10
   },
   profileInfoRow: {
-    marginTop: 10,
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'center'
@@ -76,15 +82,31 @@ const styles = StyleSheet.create({
   profileInfoImg: {
     width: 100,
     height: 100,
-    borderRadius: 50
+    borderWidth: 5,
+    borderColor: '#ffee0a',
+    borderRadius: 2
   },
   profileInfo: {
     marginLeft: 20,
     width:200
   },
   profileInfoText: {
+    fontFamily: 'Pixel LCD-7',
     color: '#ffee0a',
-    fontSize: 14
+    fontSize: 14,
+    marginBottom: 5
+  },
+  profileInfoUrl: {
+    backgroundColor: '#ffee0a',
+    width: 192,
+    borderRadius: 2,
+    padding: 5
+  },
+  profileInfoUrlText: {
+    fontFamily: 'Pixel LCD-7',
+    fontSize: 14,
+    color:'#d80000',
+    textAlign: 'center'
   }
 });
 

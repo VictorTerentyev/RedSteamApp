@@ -39,9 +39,8 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSAppTransportSecurity</key>
-	<!--See http://ste.vn/2015/06/10/configuring-app-transport-security-ios-9-osx-10-11/ -->
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
@@ -52,5 +51,17 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Red October-Fat.ttf</string>
+		<string>Red October-Regular.ttf</string>
+		<string>Red October-Stencil.ttf</string>
+		<string>red-october.regular.ttf</string>
+		<string>RedOctober.ttf</string>
+		<string>Red_October-Regular.ttf</string>
+		<string>Red_October-Regular.woff</string>
+		<string>Pixel LCD-7.ttf</string>
+		<string>vincHand.ttf</string>
+	</array>
 </dict>
 </plist>

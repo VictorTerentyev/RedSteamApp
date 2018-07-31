@@ -32,7 +32,8 @@ function setStyles(display) {
     errorMessage: {
       display: display,
       backgroundColor: '#d80000',
-      marginTop: 20,
+      marginBottom: 20,
+      width: 320
     }
   });
   return styles.errorMessage;
@@ -40,10 +41,13 @@ function setStyles(display) {
 
 const styles = StyleSheet.create({
   errorName: {
+    fontFamily: 'Pixel LCD-7',
     fontSize: 18,
     color: '#ffee0a',
+    marginBottom: 10
   },
   errorText: {
+    fontFamily: 'Pixel LCD-7',
     fontSize: 14,
     color: '#ffee0a',
   }
