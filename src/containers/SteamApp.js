@@ -15,6 +15,8 @@ import {
   ScrollView,
   Dimensions
 } from 'react-native';
+import Video from 'react-native-video';
+import BackgroundVideo from '../../videos/background.mp4';
 
 import * as AppActions from '../actions/AppActions';
 
@@ -29,6 +31,14 @@ class SteamApp extends Component {
 
     return (
       <View style={styles.container}>
+        <Video
+          repeat
+          playInBackground
+          playWhenInactive
+          resizeMode='cover'
+          source={BackgroundVideo}
+          style={styles.backgroundVideo}
+        />
         <ScrollView 
           contentContainerStyle={{
             flexGrow : 1,
@@ -62,8 +72,6 @@ class SteamApp extends Component {
   }
 }
 
-const screenWidth = 
-
 SteamApp.propTypes = {
   profileInfo: PropTypes.object,
   dispatch: PropTypes.func
@@ -89,6 +97,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
     width: 320
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0
   }
 });
 
