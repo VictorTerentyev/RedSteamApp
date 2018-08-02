@@ -1,0 +1,4 @@
+keystore password: 1515379
+First Last Name: Victor Terentyev
+Location, State: Minsk, Belarus
+Two-letter code: BY
