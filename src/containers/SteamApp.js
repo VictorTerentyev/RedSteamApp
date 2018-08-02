@@ -15,8 +15,10 @@ import {
   ScrollView,
   Dimensions
 } from 'react-native';
+
 import Video from 'react-native-video';
-import BackgroundVideo from '../../videos/background.mp4';
+import BackgroundVideo from '../../assets/videos/background.mp4';
+import BackgroundMusic from '../../assets/sounds/background.mp4';
 
 import * as AppActions from '../actions/AppActions';
 
@@ -38,6 +40,12 @@ class SteamApp extends Component {
           resizeMode='cover'
           source={BackgroundVideo}
           style={styles.backgroundVideo}
+        />
+        <Video
+          repeat
+          playWhenInactive
+          audioOnly
+          source={BackgroundMusic}
         />
         <ScrollView 
           contentContainerStyle={{
@@ -63,12 +71,16 @@ class SteamApp extends Component {
   constructor() {
     super();
     this.state = {
-      screenWidth: Dimensions.get('window').width,
+      screenWidth: Dimensions.get('window').width
     }
 
     Dimensions.addEventListener('change', () => {
       this.setState({screenWidth: Dimensions.get('window').width});
     })
+  }
+
+  bgMusicStart() {
+    this.state.bgMusic.play();
   }
 }
 
@@ -102,8 +114,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    bottom: 0,
+    bottom: -2,
     right: 0
+  },
+  backgroundMusic: {
+    display: 'none'
   }
 });
 

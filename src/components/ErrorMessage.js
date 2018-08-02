@@ -31,7 +31,6 @@ function setStyles(display) {
   const styles = StyleSheet.create({
     errorMessage: {
       display: display,
-      backgroundColor: '#d80000',
       marginBottom: 20,
       width: 320
     }
