@@ -1,1 +1,2 @@
-export const SUBMIT_ID = 'SUBMIT_ID';
+export const SUBMIT_CONTENT = 'SUBMIT_CONTENT';
+export const SUBMIT_GAMES = 'SUBMIT_GAMES';

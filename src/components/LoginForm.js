@@ -8,7 +8,8 @@ import {
   TextInput,
   TouchableHighlight
 } from 'react-native';
-import { submit } from '../actions/AppActions';
+import { submitContent } from '../actions/AppActions';
+import { submitGames } from '../actions/AppActions';
 
 export default class LoginForm extends Component {
   render () {
@@ -30,7 +31,8 @@ export default class LoginForm extends Component {
     return {
       ...prevState,
       id: nextProps.id || '',
-      content: nextProps.content || ''
+      content: nextProps.content || '',
+      games: nextProps.games || ''
     }
   }
 
@@ -38,7 +40,12 @@ export default class LoginForm extends Component {
     fetch('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + this.props.key + '&steamids=' + this.state.id)
     .then((response) => response.json())
     .then((result) => this.setState({ content: result.response.players[0] }))
-    .then(submitLoginBind.bind(this));
+    .then(setContent.bind(this));
+
+    fetch('http://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key=' + this.props.key + '&steamid=' + this.state.id + '&include_appinfo=1')
+    .then((response) => response.json())
+    .then((result) => this.setState({ games: result.response.games }))
+    .then(setGames.bind(this));
   }
 
   inputHandleChange = (e) => {
@@ -46,19 +53,29 @@ export default class LoginForm extends Component {
   }
 }
 
-function submitLoginBind() {
+function setContent() {
   if (this.state.content === undefined) {
-    return this.props.submit(this.state.id, this.state.content, { profilePageDisp: 'none', errorMessageDisp: 'flex' });
+    return this.props.submitContent(this.state.id, this.state.content, { profilePageDisp: 'none', profileGamesDisp: 'none', errorMessageDisp: 'flex' });
   } else {
-    return this.props.submit(this.state.id, this.state.content, { profilePageDisp: 'flex', errorMessageDisp: 'none' });
+    return this.props.submitContent(this.state.id, this.state.content, { profilePageDisp: 'flex', profileGamesDisp: 'flex', errorMessageDisp: 'none' });
+  }
+}
+
+function setGames() {
+  if (this.state.games === undefined) {
+    return this.props.submitGames(this.state.id, this.state.games, { profilePageDisp: 'none', profileGamesDisp: 'none', errorMessageDisp: 'flex' });
+  } else {
+    return this.props.submitGames(this.state.id, this.state.games, { profilePageDisp: 'flex', profileGamesDisp: 'flex', errorMessageDisp: 'none' });
   }
 }
 
 LoginForm.propTypes = {
-  submit: PropTypes.func,
+  submitContent: PropTypes.func,
+  submitGames: PropTypes.func,
   key: PropTypes.string,
   id: PropTypes.string,
-  content: PropTypes.object
+  content: PropTypes.object,
+  games: PropTypes.array
 }
 
 LoginForm.defaultProps = {

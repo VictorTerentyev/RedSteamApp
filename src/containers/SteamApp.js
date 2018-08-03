@@ -56,7 +56,7 @@ class SteamApp extends Component {
             Welcome to Red Steam App!
           </Text>
           <Text style={styles.instructions}>Please, fill the input with interesting you Steam ID</Text>
-          <LoginForm style={styles.loginForm} submit={actions.submit}/>
+          <LoginForm style={styles.loginForm} submitContent={actions.submitContent} submitGames={actions.submitGames}/>
           <ProfilePage style={styles.profilePage}/>
           <ErrorMessage style={styles.errorMessage}/> 
         </ScrollView>

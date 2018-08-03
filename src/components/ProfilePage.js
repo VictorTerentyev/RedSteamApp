@@ -10,6 +10,9 @@ import {
   TouchableHighlight,
   Linking
 } from 'react-native';
+
+import ProfileGames from './ProfileGames';
+
 import { connect } from 'react-redux';
 
 class ProfilePage extends Component {
@@ -17,7 +20,7 @@ class ProfilePage extends Component {
     const { profileInfo: { profileInfo }, profilePageDisp: { profilePageDisp }, dispatch } = this.props;
     return (
       <View style={setStyles(this.props.profilePageDisp)}>
-        <Text style={styles.profilePage}>Profile Page:</Text>
+        <Text style={styles.profilePageText}>Profile Page:</Text>
         <View style={styles.profileInfoRow}>
           <Image
             style={styles.profileInfoImg}
@@ -32,6 +35,7 @@ class ProfilePage extends Component {
             </TouchableHighlight>
           </View>
         </View>
+        <ProfileGames style={styles.profileGamesList}/>
       </View>
     );
   }
@@ -68,7 +72,7 @@ function setStyles(display) {
 }
 
 const styles = StyleSheet.create({
-  profilePage: {
+  profilePageText: {
     fontFamily: 'Pixel LCD-7',
     color: '#ffee0a',
     fontSize: 20,
@@ -77,7 +81,8 @@ const styles = StyleSheet.create({
   profileInfoRow: {
     flexDirection:'row',
     alignItems:'center',
-    justifyContent:'center'
+    justifyContent:'center',
+    marginBottom: 20
   },
   profileInfoImg: {
     width: 100,
