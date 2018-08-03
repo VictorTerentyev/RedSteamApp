@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import ProfileGamesItem from './ProfileGamesItem';
-
+import defaultGameImg from '../../assets/images/gameItemBackground.png' 
 import { connect } from 'react-redux';
 
 class ProfileGames extends Component {
@@ -23,10 +23,10 @@ class ProfileGames extends Component {
             <View style={styles.profileGamesItem}>
               <Image
                 style={styles.profileGamesImg}
-                source={e.img_logo_url ? {uri: 'http://media.steampowered.com/steamcommunity/public/images/apps/' + e.appid + '/' + e.img_logo_url + '.jpg'} : { uri: '../../assets/images/gameItemBackground.png'}}
+                source={this.checkGameItemImgUrl(e.img_logo_url, e.appid)}
               />
               <View style={styles.profileGamesInfo}>
-                <Text style={styles.profileGamesText}> {e.name} </Text>
+                <Text style={styles.profileGamesText}>{e.name}</Text>
               </View>
             </View>
           );
@@ -35,8 +35,8 @@ class ProfileGames extends Component {
     );
   }
 
-  checkImgUrl(url) {
-    return url 
+  checkGameItemImgUrl = (url, id) => {
+    return (url === '' ? defaultGameImg : {uri: 'http://media.steampowered.com/steamcommunity/public/images/apps/' + id + '/' + url + '.jpg'});
   }
 }
 

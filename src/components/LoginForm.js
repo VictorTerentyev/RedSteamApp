@@ -54,19 +54,15 @@ export default class LoginForm extends Component {
 }
 
 function setContent() {
-  if (this.state.content === undefined) {
-    return this.props.submitContent(this.state.id, this.state.content, { profilePageDisp: 'none', profileGamesDisp: 'none', errorMessageDisp: 'flex' });
-  } else {
-    return this.props.submitContent(this.state.id, this.state.content, { profilePageDisp: 'flex', profileGamesDisp: 'flex', errorMessageDisp: 'none' });
-  }
+  return this.state.content === undefined ?
+  this.props.submitContent(this.state.id, this.state.content, { profilePageDisp: 'none', profileGamesDisp: 'none', errorMessageDisp: 'flex' }):
+  this.props.submitContent(this.state.id, this.state.content, { profilePageDisp: 'flex', profileGamesDisp: 'flex', errorMessageDisp: 'none' });
 }
 
 function setGames() {
-  if (this.state.games === undefined) {
-    return this.props.submitGames(this.state.id, this.state.games, { profilePageDisp: 'none', profileGamesDisp: 'none', errorMessageDisp: 'flex' });
-  } else {
-    return this.props.submitGames(this.state.id, this.state.games, { profilePageDisp: 'flex', profileGamesDisp: 'flex', errorMessageDisp: 'none' });
-  }
+  return this.state.games === undefined ? 
+  this.props.submitGames(this.state.id, this.state.games, { profilePageDisp: 'none', profileGamesDisp: 'none', errorMessageDisp: 'flex' }):
+  this.props.submitGames(this.state.id, this.state.games, { profilePageDisp: 'flex', profileGamesDisp: 'flex', errorMessageDisp: 'none' });
 }
 
 LoginForm.propTypes = {

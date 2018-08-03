@@ -68,7 +68,7 @@ class SteamApp extends Component {
     super();
     this.state = {
       screenWidth: Dimensions.get('window').width,
-      previousAppState: 'active',
+      appState: AppState.currentState,
       backgroundSound: new Sound('background.mp3', Sound.MAIN_BUNDLE, (error) => {
         if (!error) {
           this.state.backgroundSound.setNumberOfLoops(-1);
@@ -83,18 +83,16 @@ class SteamApp extends Component {
   }
 
   componentDidMount() {
-    AppState.addEventListener('change', (state) => {
-      if (state === 'active') {
-        if (this.state.previousAppState === 'background' || this.state.previousAppState === 'inactive') {
-          this.state.backgroundSound.play();
-          this.setState({ previousAppState: 'active'});
-        }
-      } 
-      if (state === 'background') {
-        this.state.backgroundSound.pause();
-        this.setState({ previousAppState: 'background'});
-      }
-    });
+    AppState.addEventListener('change', this.handleAppStateChange);
+  }
+
+  handleAppStateChange = (nextAppState) => {
+    if (['background', 'inactive'].includes(this.state.appState) && nextAppState === 'active') {
+      this.state.backgroundSound.play();
+    } else {
+      this.state.backgroundSound.pause();
+    }
+    this.setState({appState: nextAppState});
   }
 }
 
