@@ -65,8 +65,6 @@ LoginForm.defaultProps = {
   key: '3B0D316D0F2A33344D0CF605D3BA85A1'
 }
 
-const ID = '76561198106567256';
-
 const styles = StyleSheet.create({
   loginForm: {
     width: 320,

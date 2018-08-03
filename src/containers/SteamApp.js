@@ -13,12 +13,14 @@ import {
   Text,
   View,
   ScrollView,
-  Dimensions
+  Dimensions,
+  AppState
 } from 'react-native';
 
 import Video from 'react-native-video';
 import BackgroundVideo from '../../assets/videos/background.mp4';
-import BackgroundMusic from '../../assets/sounds/background.mp4';
+
+import Sound from 'react-native-sound';
 
 import * as AppActions from '../actions/AppActions';
 
@@ -28,7 +30,7 @@ import ErrorMessage from '../components/ErrorMessage';
 
 class SteamApp extends Component {
   render() {
-    const { profileInfo: { profileInfo }, dispatch } = this.props;
+    const { profileInfo: { profileInfo }, dispatch, componentDidMount } = this.props;
     const actions = bindActionCreators(AppActions, dispatch);
 
     return (
@@ -40,12 +42,6 @@ class SteamApp extends Component {
           resizeMode='cover'
           source={BackgroundVideo}
           style={styles.backgroundVideo}
-        />
-        <Video
-          repeat
-          playWhenInactive
-          audioOnly
-          source={BackgroundMusic}
         />
         <ScrollView 
           contentContainerStyle={{
@@ -71,7 +67,14 @@ class SteamApp extends Component {
   constructor() {
     super();
     this.state = {
-      screenWidth: Dimensions.get('window').width
+      screenWidth: Dimensions.get('window').width,
+      previousAppState: 'active',
+      backgroundSound: new Sound('background.mp3', Sound.MAIN_BUNDLE, (error) => {
+        if (!error) {
+          this.state.backgroundSound.setNumberOfLoops(-1);
+          this.state.backgroundSound.play();
+        } 
+      })
     }
 
     Dimensions.addEventListener('change', () => {
@@ -79,8 +82,19 @@ class SteamApp extends Component {
     })
   }
 
-  bgMusicStart() {
-    this.state.bgMusic.play();
+  componentDidMount() {
+    AppState.addEventListener('change', (state) => {
+      if (state === 'active') {
+        if (this.state.previousAppState === 'background' || this.state.previousAppState === 'inactive') {
+          this.state.backgroundSound.play();
+          this.setState({ previousAppState: 'active'});
+        }
+      } 
+      if (state === 'background') {
+        this.state.backgroundSound.pause();
+        this.setState({ previousAppState: 'background'});
+      }
+    });
   }
 }
 
